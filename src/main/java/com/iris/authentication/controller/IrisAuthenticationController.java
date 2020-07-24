@@ -23,6 +23,14 @@ public class IrisAuthenticationController {
     @Autowired
     AuthenticationService authenticationService;
 
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String processIrisRegistration(@Valid @RequestBody AuthCredentials authCredentials) {
+        if (authCredentials == null) {
+            throw new RuntimeException("Request mapping failed");
+        }
+        return authenticationService.registration(authCredentials);
+    }
+
     @RequestMapping(value = "/authentication", method = RequestMethod.POST)
     public String processIrisAuthentication(@Valid @RequestBody AuthCredentials authCredentials) {
         if (authCredentials == null) {
